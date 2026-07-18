@@ -54,7 +54,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ repos, username }) =
     if (repos.length === 0) {
         return (
             <div className="no-projects">
-                <p>No GitHub projects found. Make sure your repositories have the 'portfolio' topic tag.</p>
+                <p>No GitHub projects found. Make sure your repositories have the &apos;portfolio&apos; topic tag.</p>
             </div>
         );
     }

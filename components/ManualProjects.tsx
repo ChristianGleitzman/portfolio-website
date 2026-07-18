@@ -17,8 +17,8 @@ const manualProjectsData: ManualProject[] = [
   {
     id: 'secure-journal',
     title: 'Secure Journaling Application',
-    period: 'Oct 2025 – Present',
-    description: 'A secure journaling application developed as part of a 4-person Agile team.',
+    period: 'Oct 2025 – May 2026',
+    description: 'A secure journaling application developed as part of a 4-person Agile team, with a strong focus on maintainable engineering and data privacy.',
     highlights: [
       'Designed and delivered secure journaling app with future-proof engineering standards',
       'Enforced Git pull-and-merge workflow and automated backend unit testing (JUnit)',

@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import "./globals.css";
-import { ThemeProvider } from "./ThemeContext";
+import { ThemeProvider } from "next-themes";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function RootLayout({ children }: { readonly children: React.ReactNode }) {
@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { readonly children: React.Reac
   const isLanding = pathname === "/";
 
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,14 +24,14 @@ export default function RootLayout({ children }: { readonly children: React.Reac
         <link rel="manifest" href="/site.webmanifest" />
         
         <title>Christian Gleitzman | Portfolio</title>
-        <meta name="description" content="Computer Science Student specialising in backend development, systems design, and cloud architecture." />
-        <meta name="keywords" content="Christian Gleitzman, portfolio, software engineer, computer science, backend development" />
+        <meta name="description" content="Computer Science undergraduate at the University of Southampton, building backend, cloud, and systems-focused software." />
+        <meta name="keywords" content="Christian Gleitzman, portfolio, software engineer, computer science, backend development, cloud engineering" />
         <meta name="author" content="Christian Gleitzman" />
         <meta name="theme-color" content="#1a1a1a" />
         
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Christian Gleitzman | Software Engineering Portfolio" />
-        <meta property="og:description" content="Explore my projects, skills, and journey as an aspiring software engineer specialising in backend development." />
+        <meta property="og:description" content="Explore my projects, skills, and highlights as an aspiring software engineer." />
         <meta property="og:url" content="https://christian-gleitzman.me" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Christian Gleitzman | Portfolio" />
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { readonly children: React.Reac
         />
       </head>
       <body className="landing-body">
-        <ThemeProvider>
+        <ThemeProvider attribute="data-theme" defaultTheme="dark">
           {!isLanding && (
             <header className="navbar">
               <h2 className="page-title">Christian Gleitzman</h2>

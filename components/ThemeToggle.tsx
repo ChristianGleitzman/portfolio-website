@@ -1,13 +1,13 @@
 "use client";
 
-import { useTheme } from "@/app/ThemeContext";
+import { useTheme } from "next-themes";
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       className="theme-toggle"
       aria-label="Toggle dark/light theme"
       title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}

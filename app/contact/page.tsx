@@ -63,9 +63,9 @@ export default function ContactPage(): React.ReactElement {
       <ScrollFadeIn>
         <section className="opportunity-banner">
           <div className="banner-content">
-            <h3>Open to Internship Opportunities</h3>
+            <h3>Open to Graduate and Early-Career Opportunities</h3>
             <p>
-              I'm actively seeking summer internship positions. If you have an opportunity that aligns with my interests, I'd love to hear from you!
+              I’m currently in my final year of study and keen to connect with teams working on backend systems, cloud engineering, data-driven products, or thoughtful software development.
             </p>
           </div>
         </section>
@@ -75,7 +75,7 @@ export default function ContactPage(): React.ReactElement {
         <section className="contact-me">
           <h2>Get In Touch</h2>
           <p className="contact-me-info">
-            The easiest way to reach me is via <strong>email</strong>, and I'll do my best to respond promptly. You can also connect with me on{' '}
+            The easiest way to reach me is via <strong>email</strong>, and I’ll do my best to respond promptly. You can also connect with me on{' '}
             <a
               className="inlineLink"
               href="https://www.linkedin.com/in/christian-gleitzman"
@@ -84,7 +84,7 @@ export default function ContactPage(): React.ReactElement {
             >
               LinkedIn
             </a>
-            . Alternatively, fill out the form below:
+            . Alternatively, fill out the form below if you’d like to discuss a role, collaboration, or project:
           </p>
 
           <div className="form-container">
