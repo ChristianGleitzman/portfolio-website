@@ -1,71 +1,16 @@
-"use client";
-
-import React, { useState, FormEvent } from 'react';
+import React from 'react';
+import { EnvelopeSimpleIcon, LinkedinLogoIcon, GithubLogoIcon } from '@phosphor-icons/react/ssr';
 import { ScrollFadeIn } from '@/components/ScrollFadeIn';
 
-/**
- * Renders the Contact page and handles asynchronous API communication.
- * @returns A strictly-typed React functional component.
- */
 export default function ContactPage(): React.ReactElement {
-  // State management for UI feedback during network requests
-  const [statusMsg, setStatusMsg] = useState<string>("");
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
-  /**
-   * Intercepts the form submission, serializes data, and executes an async POST request.
-   * @param e - The HTML form submission event.
-   */
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setStatusMsg("");
-
-    const formData = new FormData(e.currentTarget);
-    
-    // Construct the payload matching the Python ContactPayloadDTO
-    const payload = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      subject: formData.get("subject") as string,
-      message: formData.get("message") as string,
-    };
-
-    try {
-      // Dispatch payload to the Render-hosted API route
-      const response = await fetch("https://server-infra-core-api-latest.onrender.com/api/v1/communications/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        const errorDetail = await response.text();
-        throw new Error(`HTTP ${response.status} - ${errorDetail}`);
-      }
-
-      setStatusMsg("Thank you! Your message has been sent successfully.");
-      (e.target as HTMLFormElement).reset(); // Clear the form on success
-      
-    } catch (error) {
-      console.error("API Dispatch Error:", error);
-      setStatusMsg("Failed to send message. Please try emailing me directly.");
-    } finally {
-      setIsSubmitting(false); // Re-enable the form
-    }
-  };
-
   return (
     <div className="content">
-      {/* Open to Opportunities Banner */}
       <ScrollFadeIn>
         <section className="opportunity-banner">
           <div className="banner-content">
             <h3>Open to Graduate and Early-Career Opportunities</h3>
             <p>
-              I’m currently in my final year of study and keen to connect with teams working on backend systems, cloud engineering, data-driven products, or thoughtful software development.
+              I&apos;m currently in my final year of study and keen to connect with teams working on backend systems, cloud engineering, data-driven products, or thoughtful software development.
             </p>
           </div>
         </section>
@@ -73,100 +18,46 @@ export default function ContactPage(): React.ReactElement {
 
       <ScrollFadeIn delay={0.2}>
         <section className="contact-me">
-          <h2>Get In Touch</h2>
+          <h2 className="section-title">Get In Touch</h2>
           <p className="contact-me-info">
-            The easiest way to reach me is via <strong>email</strong>, and I’ll do my best to respond promptly. You can also connect with me on{' '}
+            The easiest way to reach me is by <strong>email</strong>, and I&apos;ll do my best to respond promptly. You can also find me on LinkedIn and GitHub below.
+          </p>
+
+          <div className="contact-grid">
+            <a href="mailto:chris.gleitzman@gmail.com" className="contact-card contact-card-primary">
+              <div className="contact-card-text">
+                <span className="contact-card-label">Email</span>
+                <span className="contact-card-value">chris.gleitzman@gmail.com</span>
+              </div>
+              <span className="contact-card-icon">
+                <EnvelopeSimpleIcon size={22} weight="bold" />
+              </span>
+            </a>
+
             <a
-              className="inlineLink"
               href="https://www.linkedin.com/in/christian-gleitzman"
+              className="contact-card"
               target="_blank"
               rel="noopener noreferrer"
             >
-              LinkedIn
+              <span className="contact-card-icon">
+                <LinkedinLogoIcon size={20} weight="bold" />
+              </span>
+              <span className="contact-card-label">LinkedIn</span>
+              <span className="contact-card-value">christian-gleitzman</span>
             </a>
-            . Alternatively, fill out the form below if you’d like to discuss a role, collaboration, or project:
-          </p>
 
-          <div className="form-container">
-            <form id="contact-form" onSubmit={handleFormSubmit}>
-              <label htmlFor="name">Name</label>
-              <input 
-                type="text" 
-                name="name" 
-                id="name" 
-                placeholder="Your name" 
-                required 
-                disabled={isSubmitting} 
-              />
-
-              <label htmlFor="email">Email Address</label>
-              <input 
-                type="email" 
-                name="email" 
-                id="email" 
-                placeholder="your@email.com" 
-                required 
-                disabled={isSubmitting} 
-              />
-
-              <label htmlFor="subject">Subject</label>
-              <input 
-                type="text" 
-                name="subject" 
-                id="subject" 
-                placeholder="e.g., Internship Opportunity" 
-                required 
-                disabled={isSubmitting} 
-              />
-
-              <label htmlFor="message">Message</label>
-              <textarea 
-                name="message" 
-                id="message" 
-                rows={5} 
-                placeholder="Tell me more..." 
-                required 
-                disabled={isSubmitting}
-              ></textarea>
-
-              <input 
-                type="submit" 
-                value={isSubmitting ? "Sending..." : "Send Message"} 
-                className="btn" 
-                disabled={isSubmitting} 
-              />
-            </form>
-            
-            {/* Status Message Display */}
-            {statusMsg && (
-              <div 
-                id="form-status" 
-                style={{ 
-                  marginTop: '1rem', 
-                  color: statusMsg.includes("Failed") ? 'hsl(0, 100%, 60%)' : 'hsl(162, 92%, 50%)',
-                  textAlign: 'center',
-                  fontWeight: 'bold'
-                }}
-              >
-                {statusMsg}
-              </div>
-            )}
-          </div>
-        </section>
-      </ScrollFadeIn>
-
-      <ScrollFadeIn delay={0.4}>
-        <section className="quick-contact">
-          <h3 className="section-title">Direct Contact</h3>
-          <div className="contact-methods">
-            <a href="mailto:chris.gleitzman@gmail.com" className="contact-link">
-              + chris.gleitzman@gmail.com
-            </a>
-            <a href="https://www.linkedin.com/in/christian-gleitzman" className="contact-link" target="_blank" rel="noopener noreferrer">
-              + LinkedIn Profile
-            </a>
-            <a href="https://github.com/ChristianGleitzman" className="contact-link" target="_blank" rel="noopener noreferrer">
-              + GitHub Profile
+            <a
+              href="https://github.com/ChristianGleitzman"
+              className="contact-card"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="contact-card-icon">
+                <GithubLogoIcon size={20} weight="bold" />
+              </span>
+              <span className="contact-card-label">GitHub</span>
+              <span className="contact-card-value">ChristianGleitzman</span>
             </a>
           </div>
         </section>

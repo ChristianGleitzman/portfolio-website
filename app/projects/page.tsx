@@ -38,7 +38,7 @@ export default async function ProjectsPage() {
                 <section className="projects-intro">
                     <h2 className="section-title">My Projects</h2>
                     <p className="section-text">
-                        A selection of projects demonstrating my proficiency in software design and development, and algorithmic problem-solving. These projects highlight my commitment to making useful and interesting software. You can catch a glimpse of them below or view the full source repositories on my GitHub.
+                        A mix of coursework, personal projects, and the platform I&apos;m currently building at Teleagriculture. Source is on GitHub for anything that isn&apos;t still private.
                     </p>
                 </section>
             </ScrollFadeIn>

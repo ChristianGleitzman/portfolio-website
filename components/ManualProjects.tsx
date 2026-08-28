@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { useSpotlight } from './useSpotlight';
 
 interface ManualProject {
   id: string;
@@ -10,20 +11,35 @@ interface ManualProject {
   highlights: string[];
   technologies: string[];
   role?: string;
+  current?: boolean;
   links?: { label: string; url: string }[];
 }
 
 const manualProjectsData: ManualProject[] = [
   {
+    id: 'teleagriculture-platform',
+    title: 'Teleagriculture Sensor Cloud Platform',
+    period: 'Jul 2026 - Present',
+    description: 'A cloud-based web application that ingests and manages data from teleagriculture sensors. I joined as Programmer RA and lead the technical direction. Still early, more to come as it develops.',
+    highlights: [
+      'Leading architecture and technical direction as Programmer RA / Technical Lead',
+      'Designing the cloud service that ingests and stores live sensor data',
+      'Building the web application layer end to end',
+    ],
+    technologies: ['Cloud Architecture', 'Web Application', 'IoT / Sensor Data'],
+    role: 'Programmer RA / Technical Lead',
+    current: true,
+  },
+  {
     id: 'secure-journal',
     title: 'Secure Journaling Application',
-    period: 'Oct 2025 – May 2026',
+    period: 'Oct 2025 - May 2026',
     description: 'A secure journaling application developed as part of a 4-person Agile team, with a strong focus on maintainable engineering and data privacy.',
     highlights: [
-      'Designed and delivered secure journaling app with future-proof engineering standards',
-      'Enforced Git pull-and-merge workflow and automated backend unit testing (JUnit)',
-      'Architected decoupled MVC backend with integrated NLP model (LangChain4j) for semantic topic analysis',
-      'Maintained absolute data privacy for sensitive user inputs',
+      'Designed and delivered a secure journaling app built to hold up as the codebase grows',
+      'Enforced a Git pull-and-merge workflow and automated backend unit testing with JUnit',
+      'Architected a decoupled MVC backend with an integrated NLP model (LangChain4j) for semantic topic analysis',
+      'Kept sensitive user entries encrypted and access-controlled throughout',
     ],
     technologies: ['Java', 'Git', 'JUnit', 'LangChain4j', 'MVC Architecture'],
     role: 'SCRUM Master / Backend Engineer (4-person Agile team)',
@@ -59,7 +75,7 @@ const manualProjectsData: ManualProject[] = [
   {
     id: 'maths-revision',
     title: 'Maths Revision Game',
-    period: 'A-Level Computer Science Coursework 2022',
+    period: 'A-Level Coursework, 2022',
     description: 'A client-server Python application for student progress tracking and revision.',
     highlights: [
       'Built full-stack client-server Python application with database integration',
@@ -75,6 +91,7 @@ const manualProjectsData: ManualProject[] = [
 export const ManualProjects: React.FC = () => {
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const spotlight = useSpotlight();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -112,32 +129,38 @@ export const ManualProjects: React.FC = () => {
           ref={(el) => {
             if (el) cardRefs.current[index] = el;
           }}
-          className={`manual-project-card ${visibleCards.has(index) ? 'visible' : ''}`}
+          className={`manual-project-card spotlight ${project.current ? 'current' : ''} ${visibleCards.has(index) ? 'visible' : ''}`}
           data-index={index}
           style={{ animationDelay: `${index * 0.1}s` }}
+          {...spotlight}
         >
+          {project.current && <span className="status-pill">In Development</span>}
           <div className="project-header">
             <h4 className="project-title">{project.title}</h4>
             <p className="project-period">{project.period}</p>
           </div>
 
-          <p className="project-description">{project.description}</p>
+          <div className="project-body">
+            <div className="project-lede">
+              <p className="project-description">{project.description}</p>
 
-          <div className="project-highlights">
-            <h5>Key Highlights</h5>
-            <ul>
-              {project.highlights.map((highlight, idx) => (
-                <li key={idx}>{highlight}</li>
-              ))}
-            </ul>
-          </div>
+              <div className="project-tech-stack">
+                <h5>Tech Stack</h5>
+                <div className="tech-tags">
+                  {project.technologies.map((tech) => (
+                    <span key={tech} className="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
 
-          <div className="project-tech-stack">
-            <h5>Tech Stack</h5>
-            <div className="tech-tags">
-              {project.technologies.map((tech) => (
-                <span key={tech} className="tech-tag">{tech}</span>
-              ))}
+            <div className="project-highlights">
+              <h5>Key Highlights</h5>
+              <ul>
+                {project.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
             </div>
           </div>
 

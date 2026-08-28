@@ -1,19 +1,29 @@
 import { SoundButton } from "@/components/SoundButton";
+import { HeroSigil } from "@/components/HeroSigil";
+import { CredibilityPanel } from "@/components/CredibilityPanel";
 
 export default function Home() {
   return (
-    <div className="landing-container" style={{ margin: '0 auto' }}>
-      <div className="title-container">
-        <h1 className="main-title">This is,<br /><strong>Christian Gleitzman</strong></h1>
-        <h2 className="sub-title">Final Year CS Undergrad · Software Engineer</h2>
-        <p className="personal-intro">Building reliable software, solving practical problems, and growing through experience.</p>
+    <div className="hero-shell">
+      <HeroSigil />
+
+      <div className="hero-copy">
+        <h1 className="main-title"><strong>Christian Gleitzman</strong></h1>
+        <p className="sub-title">Final-Year CS Student &middot; Programmer RA / Technical Lead</p>
+        <p className="personal-intro">
+          Final-year Computer Science student at the University of Southampton, currently Technical
+          Lead on a cloud platform for teleagriculture sensor data.
+        </p>
+        <div className="button-container">
+          <SoundButton href="/projects" text="View Projects" soundFile="btnHov" />
+          <a href="/Christian_Gleitzman.pdf" className="btn btn-secondary" download>
+            Download CV
+          </a>
+        </div>
       </div>
-      <div className="button-container">
-        <SoundButton href="/about" text="Explore My Work" soundFile="btnHov" />
-        <SoundButton href="/projects" text="See My Projects" soundFile="btnHov" />
-        <a href="/Christian_Gleitzman.pdf" className="btn cv-button" download>
-          Download CV
-        </a>
+
+      <div className="hero-visual">
+        <CredibilityPanel />
       </div>
     </div>
   );

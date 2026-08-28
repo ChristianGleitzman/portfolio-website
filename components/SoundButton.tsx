@@ -13,7 +13,7 @@ export const SoundButton: React.FC<SoundButtonProps> = ({ href, text, soundFile 
     const playHoverSound = () => {
         const audio = new Audio(`/audio/${soundFile}.mp3`);
         audio.volume = 0.1;
-        audio.play().catch((e) => console.log("Audio autoplay blocked by browser"));
+        audio.play().catch(() => {});
     };
 
     return (
